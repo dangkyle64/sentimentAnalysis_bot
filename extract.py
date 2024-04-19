@@ -9,10 +9,12 @@ class extract_:
     def extract_words():
 
         #implement a selection option between file reading and text reading
-
-        #implement file reading 
+        
+        #Read text data from file
+        with open ('input.txt', 'r', encoding = 'utf-8') as file:
+            text = file.read()
 
         #implement text reading 
 
         #return as a string
-        return 0
+        return text

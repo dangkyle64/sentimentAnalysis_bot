@@ -3,26 +3,30 @@ import requests
 #API Endpoint
 url = 'https://api.meaningcloud.com/sentiment-2.1'
 
-#Payload parameters 
+class sentiment:
 
-payload = {
-    'key': 'input key here',
-    'lang': 'en',
+    def __init__(self, text):
+        self.text = ''
 
-}
+    def sentiment_input(self):
+        #Payload parameters 
 
-#Read text data from file
-with open ('input.txt', 'r', encoding = 'utf-8') as file:
-    text = file.read()
+        payload = {
+            'key': 'input key here',
+            'lang': 'en',
 
-#Include the 'txt' into the payload to be sent to the endpoint
-payload['txt'] = text
+        }
 
-#Define file input
-files = {}
+        #Include the 'txt' into the payload to be sent to the endpoint
+        payload['txt'] = self.text
 
-#Request to the API here
-response = requests.post(url, data = payload, files = files)
+        #Define file input
+        files = {}
 
-print(f'Status code: {response.status_code}')
-print(response.json())
+        #Request to the API here
+        response = requests.post(url, data = payload, files = files)
+
+        print(f'Status code: {response.status_code}')
+        print(response.json())
+
+        return 0
