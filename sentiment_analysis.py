@@ -12,7 +12,7 @@ class sentiment:
         #Payload parameters 
 
         payload = {
-            'key': '',
+            'key': '130c9b501c9c3e6cf8e2bd6fbd620019',
             'lang': 'en',
 
         }

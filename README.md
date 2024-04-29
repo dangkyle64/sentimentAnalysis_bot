@@ -14,9 +14,12 @@ Welcome to the starting repo for the Sentiment Analysis Bot! This bot aims to re
 ## Technology Used
 - Python
 - Sentiment Analysis API v2.1
+- Django
 
 ## Getting Started
-
+- Clone the github repository onto your local device
+- Open virtual environment by going to sentimentAnalysis_bot/.venv/Scripts/activate.bat
+- pip install django to get the framework 
 ## Group Members
 - Kyle Dang
 - Zach Faulkner
