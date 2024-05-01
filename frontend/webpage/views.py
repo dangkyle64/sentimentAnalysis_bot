@@ -4,6 +4,8 @@ from django.shortcuts import render
 
 import sys 
 import os 
+
+#system path to extract.py and sentiment_analysis.py
 sys.path.append(os.path.abspath("C:/Users/Kbrowser123/Documents/GitHub/sentimentAnalysis_bot"))
 import extract
 import sentiment_analysis
@@ -24,9 +26,10 @@ def analyze(request):
         #initalize sentiment analysis object with extracted text
         sentiment_scan = sentiment_analysis.sentiment(result_data)
         sentiment_result = sentiment_scan.sentiment_input()
-        print(sentiment_result)
+
         return render(request,"webpage/analyze.html",{"api_result": sentiment_result} )
     
+    #if request doesn't succeed, go back to the input page
     else:
         return render(request, "webpage/analyze.html")
 

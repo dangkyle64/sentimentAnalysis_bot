@@ -19,7 +19,7 @@ Welcome to the starting repo for the Sentiment Analysis Bot! This bot aims to re
 ## Getting Started
 - Clone the github repository onto your local device
 - Open virtual environment by going to sentimentAnalysis_bot/.venv/Scripts/activate.bat
-- pip install django to get the framework 
+- Download the dependencies -> pip install django/requests
 ## Group Members
 - Kyle Dang
 - Zach Faulkner
