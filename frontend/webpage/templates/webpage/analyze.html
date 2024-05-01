@@ -3,5 +3,15 @@
 Analyze Text
 {% endblock %}
 {% block content %}
-<p>Put your inputs here and return the API results</p>
+<form method="post">
+    {% csrf_token %}
+    <label for ="text_input">Enter text:</label><br>
+    <textarea id="text_input" name="text_input" rows="4" cols="50"></textarea><br>
+    <button type="submit">Submit</button>
+</form>
+
+{% if api_result %}
+    <h2>API Results:</h2>
+    <p>{{ api_result }}</p>
+{% endif %}
 {% endblock %}

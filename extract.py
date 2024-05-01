@@ -6,12 +6,14 @@ class extract_:
     """
     Plan to extract the text here to make it easier for the API to read and to streamline requests into one method 
     """
-    def extract_words(self):
-        text = ""
+    def extract_words(self, input_data):
+        text = input_data
+        print(text)
+        
+        """
         #implement a selection option between file reading and text reading
         stop = "continue"
         choice = input("Select input: file or user -> ")
-        
 
         #Read text data from file
         while stop == "continue":
@@ -31,6 +33,8 @@ class extract_:
             else:
                 print(f"This is not a valid choice between file or user")
                 stop = "stopped"
+        """
+        
 
         #return as a string
         return text

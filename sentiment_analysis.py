@@ -48,4 +48,4 @@ class sentiment:
 
         print (f"The total sentiment score is {score} with a confidence of {confidence}")
         print (f"Specifically, input: {input_statement}. This has a score of {score2} and confidence of {confidence2}")
-        return 0
+        return data
