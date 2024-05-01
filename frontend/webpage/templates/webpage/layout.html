@@ -13,5 +13,13 @@
         <a href="{% url 'group' %}" class="navbar-item">Group Members</a>
     </div>
 
+    <div class="body-content">
+        {% block content %}
+        {% endblock %}
+        <hr/>
+        <footer>
+            <p>&copy; 2024</p>
+        </footer>
+    </div>
     </body>
 </html>
