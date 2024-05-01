@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'webpage/site.css' %}"/>
+    </head>
+
+    <body>
+    <div class="navbar">
+        <a href="{% url 'home' %}" class="navbar-brand">Home</a>
+        <a href="{% url 'analyze' %}" class="navbar-item">Analyze</a>
+        <a href="{% url 'group' %}" class="navbar-item">Group Members</a>
+    </div>
+
+    </body>
+</html>
