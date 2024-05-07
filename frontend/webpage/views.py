@@ -6,7 +6,16 @@ import sys
 import os 
 
 #system path to extract.py and sentiment_analysis.py
-sys.path.append(os.path.abspath("C:/Users/Kbrowser123/Documents/GitHub/sentimentAnalysis_bot"))
+#sys.path.append(os.path.abspath("C:/Users/Kbrowser123/Documents/GitHub/sentimentAnalysis_bot"))
+
+#find directory of extract.py and sentiment_analysis.py
+script_dir = os.path.dirname(os.path.abspath(__file__))
+
+project_dir = os.path.abspath(os.path.join(script_dir, '..', '..'))
+
+#set the path here
+sys.path.append(project_dir)
+
 import extract
 import sentiment_analysis
 
