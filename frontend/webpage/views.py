@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import render
+from webpage.models import data_collection
 
 import sys 
 import os 
@@ -35,6 +36,13 @@ def analyze(request):
         #initalize sentiment analysis object with extracted text
         sentiment_scan = sentiment_analysis.sentiment(result_data)
         sentiment_result = sentiment_scan.sentiment_input()
+
+        records = {
+            "User Input" : result_data,
+            "Extracted Words" : sentiment_result,
+        }
+
+        data_collection.insert_one(records)
 
         return render(request,"webpage/analyze.html",{"api_result": sentiment_result} )
     
