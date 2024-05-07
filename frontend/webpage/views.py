@@ -39,7 +39,7 @@ def analyze(request):
 
         records = {
             "User Input" : result_data,
-            "Extracted Words" : sentiment_result,
+            "API Output" : sentiment_result,
         }
 
         data_collection.insert_one(records)
