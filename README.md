@@ -20,6 +20,10 @@ Welcome to the starting repo for the Sentiment Analysis Bot! This bot aims to re
 - Clone the github repository onto your local device
 - Open virtual environment by going to sentimentAnalysis_bot/.venv/Scripts/activate.bat
 - Download the dependencies -> pip install django/requests
+
+- To run the server:
+- Go into the frontend folder (cd frontend)
+- use command 'python manage.py runserver'
 ## Group Members
 - Kyle Dang
 - Zach Faulkner
