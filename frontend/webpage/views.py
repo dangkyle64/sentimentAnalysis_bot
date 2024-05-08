@@ -1,5 +1,6 @@
 from django.shortcuts import render
 import requests
+from webpage.models import data_collection
 
 def api_call(user_input):
     url = 'https://api.meaningcloud.com/sentiment-2.1'
@@ -36,6 +37,13 @@ def analyze(request):
         user_input = request.POST.get("text_input", "")
         api_result = api_call(user_input) 
         formatted_result = format_api_result(api_result)
+        records = {
+            "User Input": user_input,
+            "Formatted Result": formatted_result,
+            "API Result": api_result,
+        }
+
+        data_collection.insert_one(records)
         return render(request, "webpage/analyze.html", {"api_result": formatted_result})
     else:
         return render(request, "webpage/analyze.html")
