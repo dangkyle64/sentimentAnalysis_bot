@@ -1,57 +1,47 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-from django.shortcuts import render
-from webpage.models import data_collection
+import requests
 
-import sys 
-import os 
+def api_call(user_input):
+    url = 'https://api.meaningcloud.com/sentiment-2.1'
+    params = {'txt': user_input, 'key': '130c9b501c9c3e6cf8e2bd6fbd620019', 'lang': 'en'} 
+    try:
+        response = requests.post(url, data=params)
+        response.raise_for_status() 
+        return response.json()
+    except requests.exceptions.RequestException as e:
+        print(f"API call failed: {e}")
+        return {} 
 
-#system path to extract.py and sentiment_analysis.py
-#sys.path.append(os.path.abspath("C:/Users/Kbrowser123/Documents/GitHub/sentimentAnalysis_bot"))
+def format_api_result(api_result):
+    if 'status' in api_result and api_result['status']['code'] != "0":
+        print("API Error:", api_result['status']['msg'])
+        return {}
 
-#find directory of extract.py and sentiment_analysis.py
-script_dir = os.path.dirname(os.path.abspath(__file__))
-
-project_dir = os.path.abspath(os.path.join(script_dir, '..', '..'))
-
-#set the path here
-sys.path.append(project_dir)
-
-import extract
-import sentiment_analysis
-
-
-# Create your views here.
-def home(request):
-    return render(request, "webpage/home.html")
+    return {
+        'overall_sentiment': api_result.get('score_tag', 'Unknown'),
+        'confidence': api_result.get('confidence', '0'),
+        'irony': api_result.get('irony', 'Unknown'),
+        'sentences': [
+            {'text': sentence['text'], 'sentiment': sentence.get('score_tag', 'N/A')}
+            for sentence in api_result.get('sentence_list', [])
+        ],
+        'key_concepts': [
+            {'text': concept.get('form', ''), 'type': concept.get('type', 'N/A')}
+            for concept in api_result.get('sentimented_concept_list', [])
+        ]
+    }
 
 def analyze(request):
     if request.method == "POST":
-
-        #get user input and then extract the words
-        user_input = request.POST.get("text_input", "") #input form for user
-        extract_result = extract.extract_()
-        result_data = extract_result.extract_words(user_input)
-
-        #initalize sentiment analysis object with extracted text
-        sentiment_scan = sentiment_analysis.sentiment(result_data)
-        sentiment_result = sentiment_scan.sentiment_input()
-
-        records = {
-            "User Input" : result_data,
-            "API Output" : sentiment_result,
-        }
-
-        data_collection.insert_one(records)
-
-        return render(request,"webpage/analyze.html",{"api_result": sentiment_result} )
-    
-    #if request doesn't succeed, go back to the input page
+        user_input = request.POST.get("text_input", "")
+        api_result = api_call(user_input) 
+        formatted_result = format_api_result(api_result)
+        return render(request, "webpage/analyze.html", {"api_result": formatted_result})
     else:
         return render(request, "webpage/analyze.html")
 
+def home(request):
+    return render(request, "webpage/home.html")
+
 def group(request):
     return render(request, "webpage/group.html")
-
-
-
