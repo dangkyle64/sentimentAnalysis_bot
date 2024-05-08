@@ -1,17 +1,30 @@
 {% extends "webpage/layout.html" %}
-{% block title %}
-Analyze Text
-{% endblock %}
 {% block content %}
-<form method="post">
-    {% csrf_token %}
-    <label for ="text_input">Enter text:</label><br>
-    <textarea id="text_input" name="text_input" rows="4" cols="50"></textarea><br>
-    <button type="submit">Submit</button>
-</form>
+<div class="container mt-4">
+    <h1>Analyze Text</h1>
+    <form method="post" class="mb-3">
+        {% csrf_token %}
+        <textarea name="text_input" class="form-control" rows="4" placeholder="Enter text here..."></textarea>
+        <button type="submit" class="btn btn-primary mt-2">Submit</button>
+    </form>
 
-{% if api_result %}
-    <h2>API Results:</h2>
-    <p>{{ api_result }}</p>
-{% endif %}
+    {% if api_result %}
+    <div class="results mt-4">
+        <h2>Results</h2>
+        <div class="alert alert-info">Overall Sentiment: {{ api_result.overall_sentiment }}</div>
+        <div>Confidence: {{ api_result.confidence }}%</div>
+        <div>Irony: {{ api_result.irony }}</div>
+
+        <h3>Sentences and Sentiments</h3>
+        {% for sentence in api_result.sentences %}
+            <p><strong>{{ sentence.text }}</strong>: {{ sentence.sentiment }}</p>
+        {% endfor %}
+
+        <h3>Key Concepts</h3>
+        {% for concept in api_result.key_concepts %}
+            <p>{{ concept.text }} ({{ concept.type }})</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
 {% endblock %}
