@@ -1,13 +1,13 @@
 .message {
     font-weight: 600;
-    color:greenyellow;
+    color:rgb(179, 179, 179);
 }
 
 .navbar {
-    background-color:lightblue;
+    background-color:rgb(95, 104, 96);
     font-size:1em;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    color:white;
+    color:rgb(0, 0, 0);
     padding: 8px 5px 8px 5px;
 }
 
